@@ -1,0 +1,21 @@
+# Liste des services utilisé
+services:
+    mariadb:
+        image: mariadb:latest
+        environment:
+            MYSQL_ROOT_PASSWORD: password
+            MYSQL_DATABASE: templateDB_apache
+            MYSQL_USER: user
+            MYSQL_PASSWORD: userpassword
+        volumes:
+        - ./config/mariadb/init.sql:/docker-entrypoint-initdb.d/init.sql
+        ports:
+        - "7000:3306"
+        networks:
+            - dbnet
+# Configuration networks
+networks:
+    dbnet:
+        driver: bridge
+volumes:
+    mariadb-data:
